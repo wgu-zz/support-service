@@ -1,0 +1,16 @@
+<% questions.each do |question| %>
+  <li class="subnav">
+    <div class="row">
+      <div class="span1 status-tab <%= status_class_for_question(question) %>">
+
+      </div>
+      <div class="span10">
+        <span class="lead small"><a href="/questions/<%= question["question_id"] %>"><%= question["title"] %></a></span>
+        <% if assigned_questions.has_key?(question["question_id"].to_s) %>
+          <span class="label label-important pull-right"><%= assigned_questions[question["question_id"].to_s].status %></span>
+          <span class="label label-important pull-right"><%= assigned_questions[question["question_id"].to_s].priority %></span>
+        <% end %>
+      </div>
+    </div>
+  </li>
+<% end %>

@@ -1,0 +1,28 @@
+// Place all the styles related to the home controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+body {
+  margin-top : 60px;
+}
+
+.navbar .nav > li > a.btn.btn-success { 
+  height : 20px;
+  padding : 5px;
+}
+
+.jumbotron h1 {
+  margin-bottom: 9px;
+  font-size: 40px;
+  font-weight: bold;
+  letter-spacing: -1px;
+  line-height: 1;
+}
+
+.navbar .nav > li > a.btn.btn-success#sign-in { 
+  padding-left: 20px;
+  background-position-y: 9px;
+  background-position-x: 5px;
+  background-repeat: no-repeat;
+  background-image: url(/assets/so_btn.png);
+}

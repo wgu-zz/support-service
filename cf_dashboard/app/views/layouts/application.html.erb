@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>CfDashboard</title>
+  <%= stylesheet_link_tag    "application", :media =>
+    "all" %>
+    <%= javascript_include_tag "application" %>
+      <%= csrf_meta_tags %></head>
+  <body>
+
+  <body data-spy="scroll" data-target=".subnav" data-offset="50">
+
+    <!-- Navbar ================================================== -->
+    <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <a class="brand" href="../">Support Dashboard</a>
+          <div class="nav-collapse">
+            <ul class="nav">
+              <li>
+                <a href="http://news.bootswatch.com">Status</a>
+              </li>
+              <li>
+                <a id="swatch-link" href="/questions">Questions</a>
+              </li>
+            </ul>
+            <ul class="nav pull-right">
+              <% if user_signed_in? %>
+                  <li><a href="/profile"><%= current_user.display_name %></a></li>
+                  <li><%= link_to "Sign out", destroy_user_session_path, :method => :delete %></li>
+              <% else %>
+                  <li></li>
+
+                  <li><%= link_to "Sign In", omniauth_authorize_path(:user, :stackoverflow), :id => "sign-in", :class => "btn btn-success" %></li>
+              <% end %>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+
+   
+      <%= yield %>
+    </div>
+  </body>
+</html>

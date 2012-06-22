@@ -1,0 +1,5 @@
+<ul class="answers-list">
+  <% @answers.each do |answer| %>
+    <%= render :partial => '/common/answer', :locals => { :answer => answer, :show_profile => true } %>
+  <% end %>
+</ul>
