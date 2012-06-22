@@ -201,7 +201,7 @@ Devise.setup do |config|
   
   so_creds = StackOverflowClient.creds
   config.omniauth :stackoverflow, so_creds[:client_id], so_creds[:secret], :scope => 'no_expiry', :oauth_key => so_creds[:key]
-
+  
   # config.omniauth :stackoverflow, 'n0DtSETZdAnmqDLtIGp7og', 'kgsOA3)dZHpmC4E0*)R72Q((', :scope => 'no_expiry'
   # config.omniauth :facebook, "128781740545864", "0648a99ac6144a3e07dd5893fae49464"
  

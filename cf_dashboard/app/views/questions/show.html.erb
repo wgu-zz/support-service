@@ -2,6 +2,8 @@
 
 <% form_path = @assignment.id.nil? ? question_assignments_path(params[:id]) : question_assignment_path(params[:id], @assignment.id) %>
 
+
+<%= form_for @assignment, :url => form_path, :class => "form-horizontal" do |form| %>
 <div class="row">
   <div class="span8">
     <h2><%= @question["title"] %></h2>
@@ -15,7 +17,7 @@
         Date updated : <%= Time.at(@question["last_edit_date"]).strftime("%Y-%m-%d %H:%M %Z") %>
       <% end %>
 
-      <%= form_for @assignment, :url => form_path, :class => "form-horizontal" do |form| %>
+      
         <fieldset>
           <legend>Manage question</legend>
 
@@ -61,17 +63,34 @@
             <button type="submit" class="btn btn-primary">Save changes</button>
           </div>
         </fieldset>
-      <% end %>
+
     </div>
   </div>
 </div>
 
-<div class="row">
-  <div class="span12">
-    <div class="well">
-      <h4><%= @question["answer_count"] %> answers. <a id="load-answers" href="#">Show</a></h4>
-      <div id="answers"></div>
+  <div class="row">
+    <div class="span12">
+      <div class="well">
+        <h4><%= @question["answer_count"] %> answers. <a id="load-answers" href="#">Show</a></h4>
+        <div id="answers"></div>
+      </div>
     </div>
   </div>
-</div>
 
+  <h2>Notes</h2>
+
+  <% @assignment.notes.each do |note| %>
+    <%= note.content %>
+    <%= note.created_at %>
+  <% end %>
+
+  <%= form.fields_for :notes do |note_form| %>
+    <% if note_form.object.new_record? %>
+      <%= note_form.label :content %>
+      <%= note_form.text_area :content, :cols=>180, :rows=>5  %>
+    <% end %>
+  <% end %>
+
+  <button type="submit" class="btn btn-primary">Save changes</button>
+
+<% end %>

@@ -1,9 +1,11 @@
 ---
 development:
-  adapter: sqlite3
-  database: db/development.sqlite3
-  pool: 5
-  timeout: 5000
+  adapter: mysql2
+  database: da87da2d5d5df483da45b6fea114ca701
+  host: 127.0.0.1
+  port: 10000
+  username: uCsRxN3zEUDf3
+  password: pfggfwhwGDZqs
 test:
   adapter: sqlite3
   database: db/test.sqlite3

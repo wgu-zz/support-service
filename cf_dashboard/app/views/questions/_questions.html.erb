@@ -5,7 +5,7 @@
 
       </div>
       <div class="span10">
-        <span class="lead small"><a href="/questions/<%= question["question_id"] %>"><%= question["title"] %></a></span>
+        <span class="lead small"><a href="/questions/<%= question["question_id"] %>"><%= question["title"].html_safe %></a></span>
         <% if assigned_questions.has_key?(question["question_id"].to_s) %>
           <span class="label label-important pull-right"><%= assigned_questions[question["question_id"].to_s].status %></span>
           <span class="label label-important pull-right"><%= assigned_questions[question["question_id"].to_s].priority %></span>

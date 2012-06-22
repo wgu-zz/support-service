@@ -4,18 +4,19 @@ gem 'rails', '3.2.5'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
-gem 'sqlite3'
 gem 'mysql2'
-gem 'pg'
 
 gem 'devise'
 gem 'omniauth'
 # gem 'omniauth-facebook', :path => '/Users/danhigham/Projects/rails/omniauth-facebook'
-gem 'omniauth-stackoverflow', :path => '/Users/danhigham/Projects/rails/omniauth-stackoverflow'
+gem 'omniauth-stackoverflow', :git => 'git://github.com/danhigham/omniauth-stackoverflow.git'
+
 gem 'httparty'
 
-gem 'vmc'
-gem 'caldecott', '>=0.0.5'
+group :development do
+  gem 'vmc'
+  gem 'caldecott', '>=0.0.5'
+end
 
 # Gems used only for assets and not required
 # in production environments by default.

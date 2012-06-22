@@ -1,7 +1,3 @@
-<!--
-<%= @questions.inspect.html_safe %>
--->
-
 <h2>Open questions assigned to you</h2>
 <ul id="open-assigned-questions">
   <%= render :partial => 'questions', :locals => { :questions => @questions, :assigned_questions => @assigned_questions } %>

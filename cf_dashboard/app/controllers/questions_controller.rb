@@ -27,6 +27,7 @@ class QuestionsController < ApplicationController
  
     # find assignment
     @assignment = Assignment.find_by_question_id(params[:id]) || Assignment.new
+    @assignment.notes.build
 
     respond_to do |format|
       format.html
