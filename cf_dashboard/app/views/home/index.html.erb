@@ -1,1 +1,48 @@
-<%= @me.inspect %>
+<h1>Stack Overflow Status</h1>
+<div class="row">
+  <div class="span4">
+    <div id="status-today" class="chart-container"></div>
+  </div>
+  <div class="span4">
+    <div id="status-week" class="chart-container"></div>
+  </div>
+  <div class="span4">
+    <div id="status-month" class="chart-container"></div>
+  </div>
+</div>
+
+<h1>Tags</h1>
+<div class="row">
+  <div class="span4">
+    <div id="tags-today" class="chart-container"></div>
+  </div>
+  <div class="span4">
+    <div id="tags-week" class="chart-container"></div>
+  </div>
+  <div class="span4">
+    <div id="tags-month" class="chart-container"></div>
+  </div>
+</div>
+
+<h1>Team</h1>
+<table>
+  <tr>
+    <td>User</td>
+    <td>Total questions</td>
+    <td>Open questions</td>
+  </tr>
+  <% @users.each do |user| %>
+    <tr>
+      <td><%= user.display_name %></td>
+      <td><%= user.assignments.length %></td>
+      <td><%= user.assignments.select("Status <> 'Closed'").length %></td>
+    </tr>
+  <% end %>
+
+</table>
+
+<script>$(document).ready(function(){ do_live_stats(); });</script>
+
+
+
+

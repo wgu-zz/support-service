@@ -48,13 +48,13 @@ $status-green-high: #07BB00;
   width : 180px;
 }
 
-ul#open-questions, ul#open-assigned-questions {
+ul#questions, ul#open-questions, ul#open-assigned-questions {
   list-style:none;
   padding:0;
   margin:0;
   li {
     margin : 20px 0;
-    height : 50px;
+    height : 70px;
     background-color: #EEE;
     background-repeat: repeat-x;
     background-image: -moz-linear-gradient(top, whiteSmoke 0%, #EEE 100%);
@@ -69,6 +69,12 @@ ul#open-questions, ul#open-assigned-questions {
     -moz-border-radius: 4px;
     border-radius: 4px;
 
+    img {
+      height : 50px;
+      width : 50px;
+      margin-left : 5px;
+    }
+
     .span10 {
       width : 850px;
       margin : 10px;
@@ -81,7 +87,7 @@ ul#open-questions, ul#open-assigned-questions {
 
     div.status-tab {
       background-color: #D41E24;
-      height : 50px;
+      height : 70px;
       border-radius: 4px 0 0 4px;
       background-repeat: repeat-x;
     }
@@ -112,4 +118,31 @@ ul#open-questions, ul#open-assigned-questions {
 
   }
 
+}
+
+textarea.note-content {
+  width : 930px;
+}
+
+#manage-questions {
+  label.control-label {
+    margin-top : 5px;
+  }
+
+  input[type='text'] {
+    width : 120px;
+    float : right;
+  }
+}
+
+#loading-more { 
+  display:none; 
+}
+
+pre.note { border : none; }
+
+div.popover-inner { 
+  width : 600px; 
+  max-height : 200px;
+  overflow-y : auto;
 }

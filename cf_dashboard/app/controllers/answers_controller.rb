@@ -1,8 +1,7 @@
 class AnswersController < ApplicationController
-  before_filter :authenticate_user!
 
   def show
-    so_client = StackOverflowClient.new session["oauth_creds"].token
+    so_client = StackOverflowClient.new_with_oauth session["oauth_creds"]
     @answer = so_client.instance_eval "answers_#{params[:id]}?"
 
     respond_to do |format|
@@ -12,7 +11,7 @@ class AnswersController < ApplicationController
   end
 
   def index
-    so_client = StackOverflowClient.new session["oauth_creds"].token
+    so_client = StackOverflowClient.new_with_oauth session["oauth_creds"]
     @answers = so_client.instance_eval("questions_#{params[:question_id]}_answers?(:filter => 'withbody')")["items"]
 
     respond_to do |format|

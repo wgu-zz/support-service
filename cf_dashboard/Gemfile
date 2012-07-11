@@ -9,13 +9,16 @@ gem 'mysql2'
 gem 'devise'
 gem 'omniauth'
 # gem 'omniauth-facebook', :path => '/Users/danhigham/Projects/rails/omniauth-facebook'
-gem 'omniauth-stackoverflow', :git => 'git://github.com/danhigham/omniauth-stackoverflow.git'
+gem 'omniauth-stackoverflow'
+gem 'omniauth-jira'
 
+gem 'thin'
 gem 'httparty'
 
 group :development do
   gem 'vmc'
   gem 'caldecott', '>=0.0.5'
+  gem 'railroady'
 end
 
 # Gems used only for assets and not required

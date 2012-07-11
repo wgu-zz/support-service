@@ -1,16 +1,19 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>CfDashboard</title>
-  <%= stylesheet_link_tag    "application", :media =>
-    "all" %>
-    <%= javascript_include_tag "application" %>
-      <%= csrf_meta_tags %></head>
-  <body>
+  <title>CF Support Dashboard</title>
+  <%= stylesheet_link_tag "application", :media =>"all" %>
+
+<!--
+  <script language="javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+-->
+
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+</head>
 
   <body data-spy="scroll" data-target=".subnav" data-offset="50">
 
-    <!-- Navbar ================================================== -->
     <div class="navbar navbar-fixed-top">
       <div class="navbar-inner">
         <div class="container">
@@ -19,24 +22,42 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </a>
-          <a class="brand" href="../">Support Dashboard</a>
+          <a class="brand" href="../">CF Support Dashboard</a>
           <div class="nav-collapse">
             <ul class="nav">
               <li>
-                <a href="http://news.bootswatch.com">Status</a>
+                <a href="/">Status</a>
               </li>
-              <li>
-                <a id="swatch-link" href="/questions">Questions</a>
+              <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">Questions <b class="caret"></b></a>
+                <ul class="dropdown-menu" id="swatch-menu">
+                  <li><a href="/questions/my_open">My open questions</a></li>
+                  <li><a href="/questions/my">All my questions</a></li>
+                  <li class="divider"></li>
+                  <li><a href="/questions">All questions</a></li>
+                  <li><a href="/questions/unassigned">Unassigned questions</a></li>
+                  <li><a href="/questions/unanswered">Unanswered questions</a></li>
+                </ul>
               </li>
             </ul>
-            <ul class="nav pull-right">
-              <% if user_signed_in? %>
-                  <li><a href="/profile"><%= current_user.display_name %></a></li>
-                  <li><%= link_to "Sign out", destroy_user_session_path, :method => :delete %></li>
-              <% else %>
-                  <li></li>
 
-                  <li><%= link_to "Sign In", omniauth_authorize_path(:user, :stackoverflow), :id => "sign-in", :class => "btn btn-success" %></li>
+            <form class="navbar-search pull-left" action="/questions/search">
+              <input type="text" class="search-query span2" placeholder="Search" name="q">
+            </form>
+            
+            <ul class="nav pull-right">
+
+              <% if user_signed_in? %>
+                <li class="dropdown">
+                  <a class="dropdown-toggle" data-toggle="dropdown" href="#"><%= current_user.display_name %> <b class="caret"></b></a>
+                  <ul class="dropdown-menu" id="swatch-menu">
+                    <li><a href="/profile">My Profile</a></li>
+                    <li><%= link_to "Sign out", destroy_user_session_path, :method => :delete %></li>
+                  </ul>
+                </li>
+              <% else %>
+                <li></li>
+                <li><%= link_to "Sign In", omniauth_authorize_path(:user, :stackoverflow), :id => "sign-in", :class => "btn btn-success" %></li>
               <% end %>
             </ul>
           </div>
@@ -45,9 +66,8 @@
     </div>
 
     <div class="container">
-
-   
       <%= yield %>
     </div>
+
   </body>
 </html>

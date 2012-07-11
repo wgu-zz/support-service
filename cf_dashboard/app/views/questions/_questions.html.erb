@@ -1,16 +1,37 @@
+<% do_locking = do_load_lock || false %>
+<% closed = assigned_questions.select { |x,y| y.status == 'Closed' } %>
+
 <% questions.each do |question| %>
-  <li class="subnav">
+  <li class="subnav question-row">
     <div class="row">
       <div class="span1 status-tab <%= status_class_for_question(question) %>">
 
       </div>
       <div class="span10">
-        <span class="lead small"><a href="/questions/<%= question["question_id"] %>"><%= question["title"].html_safe %></a></span>
+        <span class="lead small"><a data-content="<%= question["body"] %>" rel="popover" href="/questions/<%= question["question_id"] %>"><%= question["title"].html_safe %></a></span>
+
         <% if assigned_questions.has_key?(question["question_id"].to_s) %>
-          <span class="label label-important pull-right"><%= assigned_questions[question["question_id"].to_s].status %></span>
-          <span class="label label-important pull-right"><%= assigned_questions[question["question_id"].to_s].priority %></span>
+          <% if not assigned_questions[question["question_id"].to_s].user_id.nil? %><span class="pull-right">
+            <img src="<%= assigned_questions[question["question_id"].to_s].user.profile_image %>">
+          </span>
+
+          <% if not assigned_questions[question["question_id"].to_s].status.empty? %><span class="label label-important pull-right"><%= assigned_questions[question["question_id"].to_s].status %></span><% end %>
+          <% if not assigned_questions[question["question_id"].to_s].priority.empty? %><span class="label label-important pull-right"><%= assigned_questions[question["question_id"].to_s].priority %></span><% end %>
         <% end %>
+
+        <% end %>
+        <br>
+        <span class="created-date"><%= Time.at(question["creation_date"]).strftime("%Y-%m-%d %H:%M %Z") %></span>
       </div>
     </div>
   </li>
 <% end %>
+
+<% if do_locking %>
+  <% if questions.length < 20 %>
+    <script>window.load_lock = true;</script>
+  <% else %>
+    <script>window.load_lock = false;</script>
+  <% end %>
+<% end %>
+

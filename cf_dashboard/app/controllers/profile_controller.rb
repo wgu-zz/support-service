@@ -4,6 +4,10 @@ class ProfileController < ApplicationController
 
   def index
     @me = current_user
+
+    so_client = StackOverflowClient.new session["oauth_creds"].token
+    @me_so_info = so_client.me?["items"][0]
+    
   end
 
   def answers

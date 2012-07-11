@@ -1,5 +1,5 @@
 <% show_profile ||= false %>
-<!-- <%= answer.inspect.html_safe %> -->
+
 <li>
   <h1 class="overlay-title">Click to view question</h1>
   <a href="/questions/<%= answer["question_id"] %>"><div class="overlay"></div></a>
@@ -11,8 +11,8 @@
         <%= answer['owner']['display_name'] %>
       </div>
       <div class="span9">
-        <span class="pull-right"><b><%= Time.at(answer["creation_date"]).strftime("%Y-%m-%d %H:%M %Z") %></b></span>
         <%= answer["body"].html_safe %>
+        <span class="pull-right"><b><%= Time.at(answer["creation_date"]).strftime("%Y-%m-%d %H:%M %Z") %></b></span>
       </div>
     </div>
   <% else %>

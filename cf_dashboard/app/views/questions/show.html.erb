@@ -1,27 +1,31 @@
-<!-- <%= @question.inspect.html_safe %>-->
-
 <% form_path = @assignment.id.nil? ? question_assignments_path(params[:id]) : question_assignment_path(params[:id], @assignment.id) %>
-
 
 <%= form_for @assignment, :url => form_path, :class => "form-horizontal" do |form| %>
 <div class="row">
   <div class="span8">
     <h2><%= @question["title"] %></h2>
+    Stack Overflow&nbsp;<a title="View on Stackoverflow.com" target="_blank" href="<%= @question["link"] %>" class="icon-share"></a>
+    <% if not @assignment.jira_id.nil? %>
+    <% if not @assignment.jira_id.empty? %>Jira&nbsp;<a title="View on Jira" target="_blank" href="https://rubicon.atlassian.net/browse/<%= @assignment.jira_id %>" class="icon-share"></a><% end %>
+    <% end %>
+    <% if not @assignment.zendesk_id.nil? %>
+    <% if not @assignment.zendesk_id.empty? %>Zendesk&nbsp;<a title="View on Zendesk" target="_blank" href="http://support.cloudfoundry.com/tickets/<%= @assignment.zendesk_id %>" class="icon-share"></a><% end %>
+    <% end %>
     <br><br>
     <%= @question["body"].html_safe %>
   </div>
   <div class="span4">
-    <div class="well">
+    <div class="well" id="manage-questions">
       Date created : <%= Time.at(@question["creation_date"]).strftime("%Y-%m-%d %H:%M %Z") %><br>
       <% if not @question["last_edit_date"].nil? %>
         Date updated : <%= Time.at(@question["last_edit_date"]).strftime("%Y-%m-%d %H:%M %Z") %>
       <% end %>
 
-      
         <fieldset>
           <legend>Manage question</legend>
 
           <div class="control-group question-management">
+
             <div class="row">
               <div class="span1">
                 <label class="control-label" for="optionsCheckbox">Owner</label>
@@ -57,10 +61,33 @@
               </div>
             </div>
 
+            <br>
+            <div class="row">
+              <div class="span1">
+                <label class="control-label" for="optionsCheckbox">Jira ID</label>
+              </div>
+              <div class="span2 pull-right">
+                <div class="controls">
+                  <%= form.text_field(:jira_id) %>
+                </div>
+              </div>
+            </div>
+
+            <br>
+            <div class="row">
+              <div class="span1">
+                <label class="control-label" for="optionsCheckbox">Zendesk ID</label>
+              </div>
+              <div class="span2 pull-right">
+                <div class="controls">
+                  <%= form.text_field(:zendesk_id) %>
+                </div>
+              </div>
+            </div>
           </div>
 
           <div class="form-actions">
-            <button type="submit" class="btn btn-primary">Save changes</button>
+            <% if not current_user.nil? %><button type="submit" class="btn btn-primary">Save changes</button><% end %>
           </div>
         </fieldset>
 
@@ -79,18 +106,36 @@
 
   <h2>Notes</h2>
 
-  <% @assignment.notes.each do |note| %>
-    <%= note.content %>
-    <%= note.created_at %>
-  <% end %>
+  <% @assignment.notes.reverse_order.each do |note| %>
+    <% if not note.new_record? %>
+      <div class="well">
+        <div class="row">
+          <div class="span2 profile">
+            <% if not note.user.nil? %>
+              <img src="<%= note.user.profile_image %>"><br>
+              <%= note.user.display_name %>
+            <% end %>
+          </div>
+          <div class="span9">
+            <pre class="note"><%= note.content %></pre>
+            <span class="pull-right"><%= note.created_at %></span>
 
-  <%= form.fields_for :notes do |note_form| %>
-    <% if note_form.object.new_record? %>
-      <%= note_form.label :content %>
-      <%= note_form.text_area :content, :cols=>180, :rows=>5  %>
+          </div>
+
+        </div>
+      </div>
     <% end %>
   <% end %>
+  <% if not current_user.nil? %>
+    <h3>Add new note</h3>
+    <%= form.fields_for :notes do |note_form| %>
 
-  <button type="submit" class="btn btn-primary">Save changes</button>
+      <% if note_form.object.new_record? %>
+        <%= note_form.hidden_field :user_id, :value => current_user.id %>
+        <%= note_form.text_area :content, :cols=>180, :rows=>5, :class=>'note-content' %>
+      <% end %>
+    <% end %>
 
+    <button type="submit" class="btn btn-primary">Save changes</button>
+  <% end %>
 <% end %>

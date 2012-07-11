@@ -1,9 +1,7 @@
-<h2>Open questions assigned to you</h2>
-<ul id="open-assigned-questions">
-  <%= render :partial => 'questions', :locals => { :questions => @questions, :assigned_questions => @assigned_questions } %>
-</ul>
-
 <h2>All open questions</h2>
 <ul id="open-questions">
-  <%= render :partial => 'questions', :locals => { :questions => @all_questions, :assigned_questions => @all_assigned_questions } %>
+  <%= render :partial => 'questions', :locals => { :questions => @all_questions, :assigned_questions => @all_assigned_questions, :do_load_lock => true} %>
 </ul>
+
+<span id="loading-more"><center><h2>Loading more questions ... </h2></center><br></span>
+<script language="javascript">$(document).ready(function(){ init_load_on_scroll(); });</script>

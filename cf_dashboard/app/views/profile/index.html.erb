@@ -9,7 +9,14 @@
   </div>
 
   <h2>Your details</h2>
-  
+  <!-- <%= @me_so_info.inspect.html_safe %> -->
+
+  <div class="row">
+    <div class="span4 offset1"><h3>Stack Overflow Rep: <%= @me_so_info['reputation'] %></h3></div>
+  </div>
+  <br>
+  <br>
+
   <h2>Your answers</h2>
   <div id="posted-answers">
     <ul>

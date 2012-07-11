@@ -15,6 +15,9 @@ class User < ActiveRecord::Base
     
     data = access_token.info
 
+    puts "#" * 10000
+    puts data.inspect
+
     if user = User.where(:email => data.email).first
       user
     else # Create a user with a stub password. 
@@ -29,5 +32,14 @@ class User < ActiveRecord::Base
 
     table
   end
+
+  def assigned_questions
+    table = {}
+    
+    assignments.all.each { |x| table[x.question_id.to_s] = x }
+
+    table
+  end
+
 
 end

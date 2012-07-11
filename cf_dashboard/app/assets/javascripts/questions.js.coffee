@@ -5,10 +5,26 @@
 $(document).ready ->
   $('#load-answers').click ->
     $('#answers').toggle()
+
     $(this).html(if $('#answers:visible').length > 0 then "Hide" else "Show")
-    if $('#answers').html != ''
+
+    if $('#answers').html() == ''
       $('#answers').load "#{document.location}/answers"
-      return false
+    return false
+
+  # $("a[rel=popover]").popover
+  #   trigger: "manual"
+  #   animate: false
+  #   placement: "bottom"
+  #   offset: 0
+  #   html: true
+  # .mouseover (e) ->
+  #   e.preventDefault()
+  #   $("a[rel=popover]").each ->
+  #     $(this).popover "hide"
+
+  #   $(this).popover "show"
+
 
   jQuery (a) ->
     a("select").each (b, c) ->
@@ -26,3 +42,18 @@ $(document).ready ->
         d.find(".dropdown-menu a").click ->
           d.find("input[type=hidden]").val(a(this).data("value")).change()
           d.find(".btn:eq(0)").text a(this).text()
+
+window.init_load_on_scroll = () ->
+  window.current_page = 1
+  window.load_lock = false
+  $(window).scroll ->
+    load_more_questions() if $(window).scrollTop() == ($(document).height() - $(window).height()) and not load_lock
+
+load_more_questions = () ->
+  window.current_page++
+  $('#loading-more').show()
+  window.load_lock = true
+  url = (if document.location.href.match(/\?/) then "#{document.location.href}&page=#{current_page}" else "#{document.location.href}?page=#{current_page}")
+  $.get url, (data) ->
+    $('#loading-more').hide()
+    $('ul#open-questions, ul#questions').append data
