@@ -18,7 +18,7 @@ gem 'httparty'
 group :development do
   gem 'vmc'
   gem 'caldecott', '>=0.0.5'
-  gem 'railroady'
+  gem 'sqlite3'
 end
 
 # Gems used only for assets and not required
@@ -49,3 +49,4 @@ gem 'jquery-rails'
 
 # To use debugger
 # gem 'debugger'
+'

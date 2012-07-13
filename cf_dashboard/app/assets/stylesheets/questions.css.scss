@@ -146,3 +146,23 @@ div.popover-inner {
   max-height : 200px;
   overflow-y : auto;
 }
+
+
+
+
+div.row.comment {
+ 
+ border-top : 1px dashed #efefef;
+  
+  .span6 span, .span9 span, .span2 span {
+    display : block;
+    text-align : right;
+    font-style : italic;
+    padding : 10px;
+  }
+
+  .span2 span {
+    text-align: left;
+
+  }
+}

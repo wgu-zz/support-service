@@ -19,4 +19,23 @@
     <span class="pull-right"><b><%= Time.at(answer["creation_date"]).strftime("%Y-%m-%d %H:%M %Z") %></b></span>
     <%= answer["body"].html_safe %>
   <% end %>
+
+   <% answer['comments'].each do |comment| %>
+      <div class="row comment">
+        <div class="span9">
+          <span>
+            <%= comment["body"].html_safe %>
+          </span>
+        </div>
+        <div class="span2">
+          <span>
+            <cite>
+          - <%= comment["owner"]["display_name"] %><br />
+            <%= Time.at(comment["creation_date"]).strftime("%Y-%m-%d %H:%M") %>
+          </cite>
+          </span>
+        </div>
+      </div>
+
+    <% end %>
 </li>

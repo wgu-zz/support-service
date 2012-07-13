@@ -14,6 +14,10 @@ class AnswersController < ApplicationController
     so_client = StackOverflowClient.new_with_oauth session["oauth_creds"]
     @answers = so_client.instance_eval("questions_#{params[:question_id]}_answers?(:filter => 'withbody')")["items"]
 
+    @answers.each do |answer|
+      answer["comments"] = so_client.instance_eval("answers_#{answer["answer_id"]}_comments? :filter => 'withbody'")["items"]
+    end
+
     respond_to do |format|
       format.html { render :layout => false }
       format.json { render :json => @answers }

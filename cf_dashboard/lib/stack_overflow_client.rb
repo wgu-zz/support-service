@@ -33,7 +33,7 @@ class StackOverflowClient
     http_method = meth.to_s =~ /^.+\?$/ ? "GET" : "POST"
     path = "https://api.stackexchange.com/2.0/#{path.match(/.+[^?!]/).to_s}"
 
-    puts "#" * 1000
+    puts "### Query is ..."
     puts options[:query].inspect
 
     if http_method == "POST"

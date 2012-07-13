@@ -3,7 +3,7 @@
 <%= form_for @assignment, :url => form_path, :class => "form-horizontal" do |form| %>
 <div class="row">
   <div class="span8">
-    <h2><%= @question["title"] %></h2>
+    <h2><%= @question["title"].html_safe %></h2>
     Stack Overflow&nbsp;<a title="View on Stackoverflow.com" target="_blank" href="<%= @question["link"] %>" class="icon-share"></a>
     <% if not @assignment.jira_id.nil? %>
     <% if not @assignment.jira_id.empty? %>Jira&nbsp;<a title="View on Jira" target="_blank" href="https://rubicon.atlassian.net/browse/<%= @assignment.jira_id %>" class="icon-share"></a><% end %>
@@ -13,6 +13,25 @@
     <% end %>
     <br><br>
     <%= @question["body"].html_safe %>
+
+    <% @comments.each do |comment| %>
+      <div class="row comment">
+        <div class="span6">
+          <span>
+            <%= comment["body"].html_safe %>
+          </span>
+        </div>
+        <div class="span2">
+          <span>
+            <cite>
+          - <%= comment["owner"]["display_name"] %><br />
+            <%= Time.at(comment["creation_date"]).strftime("%Y-%m-%d %H:%M") %>
+          </cite>
+          </span>
+        </div>
+      </div>
+
+    <% end %>
   </div>
   <div class="span4">
     <div class="well" id="manage-questions">
