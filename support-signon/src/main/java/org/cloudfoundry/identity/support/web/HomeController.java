@@ -63,9 +63,17 @@ public class HomeController {
 	public String home(HttpServletRequest request, Principal principal, Map<String, Object> model) throws IOException {
 		OpenIdUserDetails activeUser = (OpenIdUserDetails) ((Authentication) principal).getPrincipal();
 
+		String name;
+
 		//Convert ms to seconds
 		Long time = getTime();
 		Long timeStamp = time/1000;
+
+		if (activeUser.getName().equals(activeUser.getEmail().replace("@", " "))) {
+			name = activeUser.getName().split(" ")[0];
+		} else {
+			name = activeUser.getName();
+		}
 
 		String hash = null;
 		String userIpAddress = request.getHeader("x-cluster-client-ip");
@@ -77,9 +85,9 @@ public class HomeController {
 			logger.warn("NOT ABLE TO INSERT HISTORY RECORD: " + e.getMessage());
 		}
 
-		hash = DigestUtils.md5Hex(activeUser.getName() + activeUser.getEmail() + activeUser.getId() + token + timeStamp);
+		hash = DigestUtils.md5Hex(name + activeUser.getEmail() + activeUser.getId() + token + timeStamp);
 
-		model.put("name", activeUser.getName());
+		model.put("name", name);
 		model.put("email", activeUser.getEmail());
 		model.put("external_id", activeUser.getId());
 		model.put("timestamp", timeStamp);
@@ -94,7 +102,7 @@ public class HomeController {
 			session.invalidate();
 		}
 
-		logger.info("The user's name is: " + activeUser.getName() + " and email address: " + activeUser.getEmail() + " and external-id: " + activeUser.getId());
+		logger.info("The user's name is: " + name + " and email address: " + activeUser.getEmail() + " and external-id: " + activeUser.getId());
 
 		return "redirect:" + returnTo;
 	}
