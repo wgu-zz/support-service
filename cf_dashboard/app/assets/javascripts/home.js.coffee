@@ -57,9 +57,18 @@ window.do_live_stats = () ->
   week_status = create_series_from_hash status_breakdown(week)
   month_status = create_series_from_hash status_breakdown(month)
 
+  add_status_rows status_breakdown(day), status_breakdown(week), status_breakdown(month)
+
   draw_pie_chart "status-today", "Today", day_status, "bottom"
   draw_pie_chart "status-week", "Last 7 days", week_status, "bottom"
   draw_pie_chart "status-month", "Last month", month_status, "bottom"
+
+add_status_rows = (day, week, month) ->
+
+  last_row = $('#status-table tr:last')
+  last_row.after("<tr><td>Month</td><td>#{month.unanswered}</td><td>#{month.has_answers}</td><td>#{month.answered}</td></tr>");
+  last_row.after("<tr><td>Week</td><td>#{week.unanswered}</td><td>#{week.has_answers}</td><td>#{week.answered}</td></tr>");
+  last_row.after("<tr><td>Today</td><td>#{day.unanswered}</td><td>#{day.has_answers}</td><td>#{day.answered}</td></tr>");
 
 load_json = (url) ->
   questions = null
@@ -118,6 +127,9 @@ draw_pie_chart = (target, title, series, legend_pos) ->
         showInLegend: true
         dataLabels:
           enabled: false
+        events:
+          click: (event) ->
+            console.log event
 
     series: [
       type: "pie"

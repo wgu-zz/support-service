@@ -3,7 +3,7 @@ class HomeController < ApplicationController
 
   def index
     @users = User.includes :assignments
-
+    
   end
 
 end

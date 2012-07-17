@@ -27,11 +27,12 @@
 <div class="row">
   <div class="span6">
     <h1>Team</h1>
-    <table>
+    <br />
+    <table class="table table-bordered table-striped">
       <tr>
-        <td>User</td>
-        <td>Total questions</td>
-        <td>Open questions</td>
+        <th>User</th>
+        <th>Total questions</th>
+        <th>Open questions</th>
       </tr>
       <% @users.each do |user| %>
         <tr>
@@ -44,19 +45,15 @@
   </div>
   <div class="span6">
     <h1>Questions</h1>
-    <table>
+    <br />
+    <table class="table table-bordered table-striped" id="status-table">
       <tr>
-        <td>Is unanswered</td>
-        <td>Has answers</td>
-        <td>Is answered</td>
+        <th>Period</th>
+        <th>Is unanswered</th>
+        <th>Has answers</th>
+        <th>Is answered</th>
       </tr>
-      <% @users.each do |user| %>
-        <tr>
-          <td></td>
-          <td></td>
-          <td></td>
-        </tr>
-      <% end %>
+      
     </table>
   </div>
 </div>
