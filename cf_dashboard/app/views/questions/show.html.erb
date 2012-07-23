@@ -136,6 +136,20 @@
             <% end %>
           </div>
           <div class="span9">
+
+            <% if note.user_id == current_user.id %>
+              <div class="note">
+                <div class="note-edit">
+                <%= form.fields_for :notes, note do |note_form| %>
+                  <%= note_form.hidden_field :user_id, :value => current_user.id %>
+                  <%= note_form.text_area :content, :cols=>180, :rows=>5, :class=>'note-content' %>
+                <% end %>
+                </div>
+
+                <div class="edit-switch pull-right"><a href="#">Edit</a></div>
+              </div>
+            <% end %>
+
             <pre class="note"><%= note.content %></pre>
             <span class="pull-right"><%= note.created_at %></span>
 
