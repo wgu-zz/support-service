@@ -69,8 +69,9 @@ public class HomeController {
 		Long time = getTime();
 		Long timeStamp = time/1000;
 
-		if (activeUser.getName().equals(activeUser.getEmail().replace("@", " "))) {
-			name = activeUser.getName().split(" ")[0];
+		if (activeUser.getName().equals(activeUser.getEmail().replace("@", " ")) ||
+			activeUser.getName().equals(activeUser.getEmail() + ' ' + activeUser.getEmail())) {
+			name = activeUser.getEmail().split("@")[0];
 		} else {
 			name = activeUser.getName();
 		}

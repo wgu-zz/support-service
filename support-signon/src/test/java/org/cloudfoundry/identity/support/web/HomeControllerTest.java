@@ -144,6 +144,37 @@ public class HomeControllerTest {
 	}
 
 	@Test
+	public void homeTestFullNameDoubleEmail() throws Exception {
+
+		//Creating the Principal Object
+		List<GrantedAuthority> authorities = Arrays.<GrantedAuthority> asList(new SimpleGrantedAuthority("ROLE_USER"));
+
+		OpenIdUserDetails user = new OpenIdUserDetails("marissa", authorities);
+		user.setName("marissa@test.org marissa@test.org");
+		user.setEmail("marissa@test.org");
+		user.setId("11");
+
+		principal = new UsernamePasswordAuthenticationToken(user, null, authorities);
+
+		//Set SecurityContext
+		SecurityContextHolder.getContext().setAuthentication( new UsernamePasswordAuthenticationToken(principal, null, authorities));
+
+		assertEquals(principal, SecurityContextHolder.getContext().getAuthentication().getPrincipal());
+
+		String redirect = controller.home(request, principal, model);
+
+		assertEquals("redirect:https://cloudfoundry1330047343.zendesk.com/access/remote", redirect);
+		assertEquals("marissa@test.org", model.get("email"));
+		assertEquals("11", model.get("external_id"));
+		assertEquals("marissa", model.get("name"));
+		assertEquals("bba1b26e2c7af1fdbe110fa751c2b1f0", model.get("hash"));
+		assertEquals((long) 10, model.get("timestamp"));
+		assertEquals(null, SecurityContextHolder.getContext().getAuthentication());
+
+		verify(jdbcTemplate).update(eq("INSERT INTO users (EMAIL, IP, TIMESTMP) VALUES (?, ?, ?)"), eq("marissa@test.org"), eq("127.0.0.1"), eq(new Timestamp(10000)));
+	}
+
+	@Test
 	public void historySaveFailsTest() throws Exception {
 
 		assertEquals(principal, SecurityContextHolder.getContext().getAuthentication().getPrincipal());
