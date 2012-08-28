@@ -1,0 +1,57 @@
+{
+  "created_at": "2012-06-27T23:33:36Z",
+  "id": 384,
+  "resolved": true,
+  "status_dev": "green",
+  "status_prod": "green",
+  "title": "Git-push Timeouts on Cedar",
+  "upcoming": false,
+  "updated_at": "2012-07-04T23:48:42Z",
+  "href": "https://status.cf.com/api/v3/issues/384",
+  "updates": [
+    {
+      "contents": "Our engineers have resolved the git-push issue. All git-push deploys are now working as expected.",
+      "created_at": "2012-06-27T23:48:42Z",
+      "id": 1142,
+      "incident_id": 384,
+      "status_dev": "green",
+      "status_prod": "green",
+      "title": "Git-push Timeouts on Cedar",
+      "update_type": "resolved",
+      "updated_at": "2012-06-27T23:48:47Z"
+    },
+    {
+      "contents": "Our engineers have resolved the git-push issue. All git-push deploys are now working as expected.",
+      "created_at": "2012-06-27T23:46:14Z",
+      "id": 1141,
+      "incident_id": 384,
+      "status_dev": "yellow",
+      "status_prod": "green",
+      "title": "Git-push Timeouts on Cedar",
+      "update_type": "monitoring",
+      "updated_at": "2012-06-27T23:46:22Z"
+    },
+    {
+      "contents": "We're currently seeing git-push timeouts for apps on the Cedar stack. Git-pushes to the Bamboo stack are currently working.\r\n\r\nOur runtime engineers are fixing the issue now. ",
+      "created_at": "2012-06-27T23:38:18Z",
+      "id": 1140,
+      "incident_id": 384,
+      "status_dev": "yellow",
+      "status_prod": "green",
+      "title": "Git-push Timeouts on Cedar",
+      "update_type": "issue",
+      "updated_at": "2012-06-27T23:41:14Z"
+    },
+    {
+      "contents": "Our automated systems have detected potential platform errors.  We are investigating.\r\n",
+      "created_at": "2012-06-27T23:33:36Z",
+      "id": 1139,
+      "incident_id": 384,
+      "status_dev": "yellow",
+      "status_prod": "yellow",
+      "title": "Potential Platform Issues",
+      "update_type": "investigating",
+      "updated_at": "2012-06-27T23:33:36Z"
+    }
+  ]
+}
