@@ -1,0 +1,46 @@
+{
+  "created_at": "2012-07-10T04:21:25Z",
+  "id": 402,
+  "resolved": true,
+  "status_dev": "green",
+  "status_prod": "green",
+  "title": "Intermittent Git Errors",
+  "upcoming": false,
+  "updated_at": "2012-07-17T04:45:57Z",
+  "href": "https://status.cf.com/api/v3/issues/402",
+  "updates": [
+    {
+      "contents": "The issue has been resolved.",
+      "created_at": "2012-07-10T04:45:54Z",
+      "id": 1219,
+      "incident_id": 402,
+      "status_dev": "green",
+      "status_prod": "green",
+      "title": "Intermittent Git Errors",
+      "update_type": "resolved",
+      "updated_at": "2012-07-10T04:45:57Z"
+    },
+    {
+      "contents": "We've removed the affected git endpoints out of rotation and are monitoring for latent problems.",
+      "created_at": "2012-07-10T04:34:31Z",
+      "id": 1218,
+      "incident_id": 402,
+      "status_dev": "yellow",
+      "status_prod": "green",
+      "title": "Intermittent Git Errors",
+      "update_type": "monitoring",
+      "updated_at": "2012-07-10T04:34:33Z"
+    },
+    {
+      "contents": "We're aware of a problem with git push deploys and are working to resolve it.",
+      "created_at": "2012-07-10T04:21:25Z",
+      "id": 1217,
+      "incident_id": 402,
+      "status_dev": "yellow",
+      "status_prod": "green",
+      "title": "Intermittent Git Errors",
+      "update_type": "issue",
+      "updated_at": "2012-07-10T04:21:29Z"
+    }
+  ]
+}

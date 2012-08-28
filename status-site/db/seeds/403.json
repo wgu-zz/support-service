@@ -1,0 +1,68 @@
+{
+  "created_at": "2012-07-20T00:18:56Z",
+  "id": 403,
+  "resolved": true,
+  "status_dev": "green",
+  "status_prod": "green",
+  "title": "SSL Hostname Issue",
+  "upcoming": false,
+  "updated_at": "2012-07-27T01:45:12Z",
+  "href": "https://status.cf.com/api/v3/issues/403",
+  "updates": [
+    {
+      "contents": "We are continuing to optimize our load balancer configuration, but due to changes already made, applications are no longer affected. If you are still seeing an issue with SSL connectivity, please open a support ticket.",
+      "created_at": "2012-07-20T01:45:08Z",
+      "id": 1225,
+      "incident_id": 403,
+      "status_dev": "green",
+      "status_prod": "green",
+      "title": "SSL Hostname Issue",
+      "update_type": "resolved",
+      "updated_at": "2012-07-20T01:45:10Z"
+    },
+    {
+      "contents": "Additional capacity is online. We are updating SSL hostname load balancers with revised configuration.",
+      "created_at": "2012-07-20T01:04:45Z",
+      "id": 1224,
+      "incident_id": 403,
+      "status_dev": "green",
+      "status_prod": "yellow",
+      "title": "SSL Hostname Issue",
+      "update_type": "update",
+      "updated_at": "2012-07-20T01:04:49Z"
+    },
+    {
+      "contents": "We have identified an imbalanced configuration of our backends behind the SSL hostname load balancers and are working to correct it.",
+      "created_at": "2012-07-20T00:38:20Z",
+      "id": 1223,
+      "incident_id": 403,
+      "status_dev": "green",
+      "status_prod": "yellow",
+      "title": "SSL Hostname Issue",
+      "update_type": "update",
+      "updated_at": "2012-07-20T00:38:23Z"
+    },
+    {
+      "contents": "We're continuing to investigate the cause of SSL connectivity issues with customers using SSL hostname product. SSL endpoint is not affected.",
+      "created_at": "2012-07-20T00:26:33Z",
+      "id": 1222,
+      "incident_id": 403,
+      "status_dev": "green",
+      "status_prod": "yellow",
+      "title": "SSL Hostname Issue",
+      "update_type": "issue",
+      "updated_at": "2012-07-20T00:26:38Z"
+    },
+    {
+      "contents": "We are investigating an issue affecting some SSL hostname installations.",
+      "created_at": "2012-07-20T00:18:56Z",
+      "id": 1221,
+      "incident_id": 403,
+      "status_dev": "green",
+      "status_prod": "yellow",
+      "title": "SSL Hostname Issue",
+      "update_type": "investigating",
+      "updated_at": "2012-07-20T00:18:56Z"
+    }
+  ]
+}

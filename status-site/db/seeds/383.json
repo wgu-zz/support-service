@@ -1,0 +1,57 @@
+{
+  "created_at": "2012-06-25T22:46:02Z",
+  "id": 383,
+  "resolved": true,
+  "status_dev": "green",
+  "status_prod": "green",
+  "title": "Heroku API Offline",
+  "upcoming": false,
+  "updated_at": "2012-06-25T23:00:15Z",
+  "href": "https://status.heroku.com/api/v3/issues/383",
+  "updates": [
+    {
+      "contents": "We've confirmed that the platform is healthy and all platform operations have been restored.",
+      "created_at": "2012-06-25T23:00:15Z",
+      "id": 1137,
+      "incident_id": 383,
+      "status_dev": "green",
+      "status_prod": "green",
+      "title": "Heroku API Offline",
+      "update_type": "resolved",
+      "updated_at": "2012-06-25T23:00:19Z"
+    },
+    {
+      "contents": "API operations have been restored. We are continuing to monitor the platform for any other issues.",
+      "created_at": "2012-06-25T22:54:40Z",
+      "id": 1136,
+      "incident_id": 383,
+      "status_dev": "yellow",
+      "status_prod": "green",
+      "title": "Heroku API Offline",
+      "update_type": "monitoring",
+      "updated_at": "2012-06-25T22:54:40Z"
+    },
+    {
+      "contents": "The Heroku API is currently unavailable. Running apps are not affected. We are continuing to investigate.",
+      "created_at": "2012-06-25T22:50:37Z",
+      "id": 1135,
+      "incident_id": 383,
+      "status_dev": "red",
+      "status_prod": "green",
+      "title": "Heroku API Offline",
+      "update_type": "issue",
+      "updated_at": "2012-06-25T22:51:12Z"
+    },
+    {
+      "contents": "Our automated systems have detected potential platform errors.  We are investigating.\r\n",
+      "created_at": "2012-06-25T22:46:02Z",
+      "id": 1134,
+      "incident_id": 383,
+      "status_dev": "yellow",
+      "status_prod": "yellow",
+      "title": "Potential Platform Issues",
+      "update_type": "investigating",
+      "updated_at": "2012-06-25T22:46:02Z"
+    }
+  ]
+}

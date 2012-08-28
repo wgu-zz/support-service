@@ -1,0 +1,57 @@
+{
+  "created_at": "2012-07-06T23:28:04Z",
+  "id": 399,
+  "resolved": true,
+  "status_dev": "green",
+  "status_prod": "green",
+  "title": "Elevated API Errors",
+  "upcoming": false,
+  "updated_at": "2012-07-13T23:48:48Z",
+  "href": "https://status.cf.com/api/v3/issues/399",
+  "updates": [
+    {
+      "contents": "Error rates have returned to normal. This issue is now resolved.",
+      "created_at": "2012-07-06T23:48:46Z",
+      "id": 1212,
+      "incident_id": 399,
+      "status_dev": "green",
+      "status_prod": "green",
+      "title": "Elevated API Errors",
+      "update_type": "resolved",
+      "updated_at": "2012-07-06T23:48:51Z"
+    },
+    {
+      "contents": "API error rates have returned to normal levels. We're continuing to monitor the situation. ",
+      "created_at": "2012-07-06T23:43:17Z",
+      "id": 1211,
+      "incident_id": 399,
+      "status_dev": "yellow",
+      "status_prod": "green",
+      "title": "Elevated API Errors",
+      "update_type": "monitoring",
+      "updated_at": "2012-07-06T23:43:21Z"
+    },
+    {
+      "contents": "We are currently seeing elevated API error rates. Our engineers are investigating the issue.",
+      "created_at": "2012-07-06T23:33:21Z",
+      "id": 1210,
+      "incident_id": 399,
+      "status_dev": "yellow",
+      "status_prod": "green",
+      "title": "Elevated API Errors",
+      "update_type": "issue",
+      "updated_at": "2012-07-06T23:33:23Z"
+    },
+    {
+      "contents": "Our automated systems have detected potential platform errors.  We are investigating.\r\n",
+      "created_at": "2012-07-06T23:28:04Z",
+      "id": 1209,
+      "incident_id": 399,
+      "status_dev": "yellow",
+      "status_prod": "green",
+      "title": "Potential Platform Issues",
+      "update_type": "investigating",
+      "updated_at": "2012-07-06T23:28:04Z"
+    }
+  ]
+}
