@@ -4,8 +4,8 @@ class CreateIncidents < ActiveRecord::Migration
       t.string :title, null: false
       t.integer :creator_user_id, null: false
       t.integer :updater_user_id, null: false
-      t.boolean :upcoming, null: false
-      t.boolean :resolved, null: false
+      t.boolean :upcoming, null: false, default: false
+      t.boolean :resolved, null: false, default: false
 
       t.timestamps
     end

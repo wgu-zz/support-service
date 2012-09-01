@@ -25,13 +25,13 @@ ActiveRecord::Schema.define(:version => 20120823181914) do
   end
 
   create_table "incidents", :force => true do |t|
-    t.string   "title",           :null => false
-    t.integer  "creator_user_id", :null => false
-    t.integer  "updater_user_id", :null => false
-    t.boolean  "upcoming",        :null => false
-    t.boolean  "resolved",        :null => false
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
+    t.string   "title",                              :null => false
+    t.integer  "creator_user_id",                    :null => false
+    t.integer  "updater_user_id",                    :null => false
+    t.boolean  "upcoming",        :default => false, :null => false
+    t.boolean  "resolved",        :default => false, :null => false
+    t.datetime "created_at",                         :null => false
+    t.datetime "updated_at",                         :null => false
   end
 
   create_table "users", :force => true do |t|
