@@ -1,5 +1,12 @@
 package org.cloudfoundry.identity.support.web;
 
+import static org.junit.Assert.assertEquals;
+import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.anyString;
+import static org.mockito.Matchers.eq;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
 import java.security.Principal;
 import java.sql.Timestamp;
 import java.util.Arrays;
@@ -9,14 +16,10 @@ import java.util.Map;
 
 import org.cloudfoundry.identity.uaa.openid.OpenIdUserDetails;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-
-import static org.mockito.Mockito.*;
-
-import static org.junit.Assert.*;
-
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -194,6 +197,7 @@ public class HomeControllerTest {
 	}
 }
 
+@Ignore
 class TestableHomeController extends HomeController {
 	@Override
 	protected long getTime() {

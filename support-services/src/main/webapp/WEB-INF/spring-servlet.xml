@@ -29,19 +29,32 @@
 
 	<mvc:annotation-driven />
 
-	<http xmlns="http://www.springframework.org/schema/security" entry-point-ref="loginEntryPoint"
+	<sec:http pattern="/api/**">
+		<sec:http-basic />
+		<sec:intercept-url pattern="/api/**" access="ROLE_SERVICE" />
+	</sec:http>
+
+	<sec:http entry-point-ref="loginEntryPoint"
 		disable-url-rewriting="true">
-		<intercept-url pattern="/**" access="ROLE_USER" />
-		<anonymous enabled="false" />
-		<custom-filter ref="oauth2ClientFilter" after="EXCEPTION_TRANSLATION_FILTER" />
-		<custom-filter ref="openidClientFilter" before="FILTER_SECURITY_INTERCEPTOR" />
-	</http>
+		<sec:intercept-url pattern="/**" access="ROLE_USER" />
+		<sec:anonymous enabled="false" />
+		<sec:custom-filter ref="oauth2ClientFilter" after="EXCEPTION_TRANSLATION_FILTER" />
+		<sec:custom-filter ref="openidClientFilter" before="FILTER_SECURITY_INTERCEPTOR" />
+	</sec:http>
 
 	<bean id="loginEntryPoint" class="org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint">
 		<constructor-arg value="/login" />
 	</bean>
 
-	<sec:authentication-manager alias="authenticationManager" />
+	<sec:authentication-manager alias="authenticationManager">
+		<sec:authentication-provider>
+			<sec:password-encoder hash="sha" />
+			<sec:user-service>
+				<sec:user name="cf-pgm@rbcon.com" password="d505cafc56b7b66109b5d57d3c930ecb60c666dc"
+					authorities="ROLE_SERVICE" />
+			</sec:user-service>
+		</sec:authentication-provider>
+	</sec:authentication-manager>
 
 	<!--apply the oauth client context -->
 	<oauth:client id="oauth2ClientFilter" />
@@ -50,7 +63,7 @@
 		<constructor-arg value="/login" />
 		<property name="authenticationManager" ref="authenticationManager" />
 		<property name="restTemplate">
-			<oauth:rest-template resource="api" />
+			<oauth:rest-template resource="web" />
 		</property>
 		<property name="userInfoUrl" value="${userInfoUri}" />
 	</bean>
@@ -61,9 +74,28 @@
 		<property name="jdbcTemplate" ref="jdbcTemplate" />
 	</bean>
 
+	<bean id="apiController" class="org.cloudfoundry.support.services.api.ApiController">
+		<property name="uaaRestTemplate">
+			<oauth:rest-template resource="rest" />
+		</property>
+		<property name="restTemplate" ref="restTemplate" />
+		<property name="portalUrl" value="${portalUrl}" />
+		<property name="zendeskCredential" value="${zendeskCredential}" />
+		<property name="zendeskApiUpdateTicketUrl" value="${zendeskApiUpdateTicketUrl}" />
+	</bean>
+
+	<bean id="restTemplate" class="org.springframework.web.client.RestTemplate" />
+
 	<!--define an oauth 2 resource for api access -->
-	<oauth:resource id="api" type="authorization_code" client-id="${clientId}" client-secret="${clientSecret}"
-		access-token-uri="${accessTokenUri}" user-authorization-uri="${userAuthorizationUri}" scope="openid" />
+	<oauth:resource id="web" type="authorization_code"
+		client-id="${clientId}" client-secret="${clientSecret}"
+		access-token-uri="${accessTokenUri}" user-authorization-uri="${userAuthorizationUri}"
+		scope="openid" />
+
+	<!-- oauth2 resource for service client -->
+	<oauth:resource id="rest" type="client_credentials"
+		client-id="${clientId}" client-secret="${clientSecret}"
+		access-token-uri="${accessTokenUri}" />
 
 	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
 		<property name="dataSource" ref="ds" />
