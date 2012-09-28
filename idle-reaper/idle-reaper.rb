@@ -1,3 +1,4 @@
+#! /usr/bin/env ruby
 require "rubygems"
 require "bundler/setup"
 require "date"
@@ -81,20 +82,25 @@ class IdleReaper
 
       client.proxy = user
 
-      unless dry_run?
-        info = client.app_info(app)
-        before = info[:state]
-      end
+      begin
+        unless dry_run?
+          info = client.app_info(app)
+          before = info[:state]
+        end
 
-      if before == "STOPPED"
-        puts "Already stopped; skipping..."
+        if before == "STOPPED"
+          puts "Already stopped #{user} #{app}; skipping..."
+          next
+        end
+
+        info[:state] = "STOPPED" unless dry_run?
+
+        puts "Stopping #{user} #{app}..."
+        client.update_app(app, info) unless dry_run?
+      rescue
+        puts "FAILED: #{user} #{app}"
         next
       end
-
-      info[:state] = "STOPPED" unless dry_run?
-
-      puts "Stopping #{user}'s #{app}..."
-      client.update_app(app, info) unless dry_run?
     end
   end
 
