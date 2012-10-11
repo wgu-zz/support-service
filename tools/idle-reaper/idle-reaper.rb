@@ -79,7 +79,7 @@ class IdleReaper
 
     client = VMC::Client.new(@options[:target], @options[:token])
     each_user(@options[:input]) do |app, user|
-
+      next if app == "name" && user == "email" # skip header row
       client.proxy = user
 
       begin
