@@ -1,4 +1,4 @@
-package org.cloudfoundry.support.services.api;
+package org.cloudfoundry.support.supportservices.controller;
 
 import static org.mockito.Matchers.*;
 import static org.mockito.Mockito.*;
@@ -8,7 +8,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.cloudfoundry.support.services.api.ApiController;
+import org.cloudfoundry.support.supportservices.controller.ApiController;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
@@ -73,9 +73,9 @@ public class ApiControllerTest {
 		restController.setXBsAuthToken(xBsAuthToken);
 		restController.setPortalUrl(portalUrl);
 		restController.setUaaRestTemplate(uaaRestTemplate);
-		restController.setRestTemplate(uaaRestTemplate);
 		restController.setZendeskApiUpdateTicketUrl(zendeskApiUpdateTicketUrl);
 		restController.setZendeskCredential(zendeskCredential);
+		restController.setRestTemplate(uaaRestTemplate);
 		restController.paymentInfo(ticketId + "," + userExternalId);
 		// verify methods called
 		HttpHeaders headers = new HttpHeaders();

@@ -1,4 +1,4 @@
-package org.cloudfoundry.support.services.api;
+package org.cloudfoundry.support.supportservices.controller;
 
 import java.util.HashMap;
 import java.util.List;
@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -24,9 +25,10 @@ public class ApiController {
 	private static final Logger logger = LoggerFactory
 			.getLogger(ApiController.class);
 
+	private RestTemplate restTemplate;
+
 	private String xBsAuthToken;
 	private RestTemplate uaaRestTemplate;
-	private RestTemplate restTemplate;
 	private String portalUrl;
 	private String zendeskCredential;
 	private String zendeskApiUpdateTicketUrl;
@@ -39,10 +41,6 @@ public class ApiController {
 		this.uaaRestTemplate = uaaRestTemplate;
 	}
 
-	public void setRestTemplate(RestTemplate restTemplate) {
-		this.restTemplate = restTemplate;
-	}
-
 	public void setPortalUrl(String portalUrl) {
 		this.portalUrl = portalUrl;
 	}
@@ -53,6 +51,11 @@ public class ApiController {
 
 	public void setZendeskApiUpdateTicketUrl(String zendeskApiUpdateTicketUrl) {
 		this.zendeskApiUpdateTicketUrl = zendeskApiUpdateTicketUrl;
+	}
+
+	@Autowired
+	public void setRestTemplate(RestTemplate restTemplate) {
+		this.restTemplate = restTemplate;
 	}
 
 	@RequestMapping("paymentInfo")

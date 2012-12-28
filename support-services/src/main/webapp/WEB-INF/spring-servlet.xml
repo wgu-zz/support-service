@@ -4,30 +4,13 @@
 	This product includes a number of subcomponents with separate copyright notices and license terms. Your use of these subcomponents
 	is subject to the terms and conditions of the subcomponent's license, as noted in the LICENSE file. -->
 
-<beans	xmlns="http://www.springframework.org/schema/beans"
-		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-		xmlns:mvc="http://www.springframework.org/schema/mvc"
-		xmlns:oauth="http://www.springframework.org/schema/security/oauth2"
-		xmlns:cloud="http://schema.cloudfoundry.org/spring"
-		xmlns:context="http://www.springframework.org/schema/context"
-		xmlns:sec="http://www.springframework.org/schema/security"
-		xmlns:jdbc="http://www.springframework.org/schema/jdbc"
-		xsi:schemaLocation="http://www.springframework.org/schema/security/oauth2
-			http://www.springframework.org/schema/security/spring-security-oauth2-1.0.xsd
-			http://www.springframework.org/schema/mvc
-			http://www.springframework.org/schema/mvc/spring-mvc-3.1.xsd
-			http://www.springframework.org/schema/security
-			http://www.springframework.org/schema/security/spring-security-3.1.xsd
-			http://www.springframework.org/schema/beans
-			http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
-			http://www.springframework.org/schema/context
-			http://www.springframework.org/schema/context/spring-context-3.1.xsd
-			http://schema.cloudfoundry.org/spring
-			http://schema.cloudfoundry.org/spring/cloudfoundry-spring.xsd
-			http://www.springframework.org/schema/jdbc
-			http://www.springframework.org/schema/jdbc/spring-jdbc-3.1.xsd">
-
-	<mvc:annotation-driven />
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:sec="http://www.springframework.org/schema/security"
+	xmlns:oauth="http://www.springframework.org/schema/security/oauth2"
+	xsi:schemaLocation="http://www.springframework.org/schema/security/oauth2 http://www.springframework.org/schema/security/spring-security-oauth2-1.0.xsd
+		http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.1.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd">
 
 	<sec:http pattern="/api/**">
 		<sec:http-basic />
@@ -68,23 +51,20 @@
 		<property name="userInfoUrl" value="${userInfoUri}" />
 	</bean>
 
-	<bean id="homeController" class="org.cloudfoundry.identity.support.web.HomeController">
+	<bean id="homeController" class="org.cloudfoundry.support.supportservices.controller.HomeController">
 		<property name="token" value="${token}" />
 		<property name="returnTo" value="${returnTo}" />
 		<property name="jdbcTemplate" ref="jdbcTemplate" />
 	</bean>
 
-	<bean id="apiController" class="org.cloudfoundry.support.services.api.ApiController">
+	<bean id="apiController" class="org.cloudfoundry.support.supportservices.controller.ApiController">
 		<property name="uaaRestTemplate">
 			<oauth:rest-template resource="rest" />
 		</property>
-		<property name="restTemplate" ref="restTemplate" />
 		<property name="portalUrl" value="${portalUrl}" />
 		<property name="zendeskCredential" value="${zendeskCredential}" />
 		<property name="zendeskApiUpdateTicketUrl" value="${zendeskApiUpdateTicketUrl}" />
 	</bean>
-
-	<bean id="restTemplate" class="org.springframework.web.client.RestTemplate" />
 
 	<!--define an oauth 2 resource for api access -->
 	<oauth:resource id="web" type="authorization_code"
@@ -96,25 +76,5 @@
 	<oauth:resource id="rest" type="client_credentials"
 		client-id="${clientId}" client-secret="${clientSecret}"
 		access-token-uri="${accessTokenUri}" />
-
-	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
-		<property name="dataSource" ref="ds" />
-	</bean>
-
-	<beans profile="default">
-		<context:property-placeholder location="classpath:application.properties" />
-
-		<!-- DataSource -->
-		<jdbc:embedded-database id="ds" type="H2">
-			<jdbc:script location="classpath:schema.sql" execution="INIT" />
-		</jdbc:embedded-database>
-	</beans>
-
-	<beans profile="cloud">
-		<context:property-placeholder location="classpath:application-cloud.properties" />
-
-		<!-- DataSource -->
-		<cloud:data-source id="ds" />
-	</beans>
 
 </beans>

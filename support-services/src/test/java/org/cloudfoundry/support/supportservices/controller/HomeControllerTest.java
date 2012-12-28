@@ -1,4 +1,4 @@
-package org.cloudfoundry.identity.support.web;
+package org.cloudfoundry.support.supportservices.controller;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Matchers.any;
@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.cloudfoundry.identity.uaa.openid.OpenIdUserDetails;
+import org.cloudfoundry.support.supportservices.controller.HomeController;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;

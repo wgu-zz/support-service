@@ -10,7 +10,7 @@
  * subcomponents is subject to the terms and conditions of the
  * subcomponent's license, as noted in the LICENSE file.
  */
-package org.cloudfoundry.identity.support.web;
+package org.cloudfoundry.support.supportservices.controller;
 
 import java.io.IOException;
 import java.security.Principal;
